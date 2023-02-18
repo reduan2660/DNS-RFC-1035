@@ -1,0 +1,2 @@
+Name                Value                   Type    TTL
+cse.du.ac.bd        localhost:1113          NS      86400

@@ -53,7 +53,7 @@ public class DNSresponse extends MessageFormat {
 
 
     /* Extract Information from Request */
-    static int parseIdOf(byte[] request){
+    public static int parseIdOf(byte[] request){
         /*
                                         1  1  1  1  1  1
           0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
@@ -67,7 +67,7 @@ public class DNSresponse extends MessageFormat {
 
         return id2 + id1*256;
     }
-    static boolean isRecursive(byte[] request){
+    public static boolean isRecursive(byte[] request){
 
         /* RD at bit last bit of third byte
 
@@ -86,7 +86,7 @@ public class DNSresponse extends MessageFormat {
         return rdBit == 1;
     }
 
-    static String domain(byte[] request) throws UnsupportedEncodingException {
+    public static String domain(byte[] request) throws UnsupportedEncodingException {
         /*
         +---------------------+
         |        Header       |   [12 byte]
@@ -126,7 +126,7 @@ public class DNSresponse extends MessageFormat {
         return domain.toString();
     }
 
-    static String domainType(byte[] request){
+    public static String domainType(byte[] request){
 
         /*
                                         1  1  1  1  1  1

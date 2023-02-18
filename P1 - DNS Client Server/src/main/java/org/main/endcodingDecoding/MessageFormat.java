@@ -1,4 +1,4 @@
-package org.example;
+package org.main.endcodingDecoding;
 
 /* RFC 1035 */
 
@@ -539,4 +539,5 @@ public class MessageFormat {
 
     }
 }
+
 

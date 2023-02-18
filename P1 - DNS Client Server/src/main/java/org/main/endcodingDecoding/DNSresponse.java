@@ -1,4 +1,4 @@
-package org.example;
+package org.main.endcodingDecoding;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

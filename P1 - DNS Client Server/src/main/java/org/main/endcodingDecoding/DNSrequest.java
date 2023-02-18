@@ -1,4 +1,4 @@
-package org.example;
+package org.main.endcodingDecoding;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -514,4 +514,5 @@ public class DNSrequest extends  MessageFormat {
 
 
 }
+
 

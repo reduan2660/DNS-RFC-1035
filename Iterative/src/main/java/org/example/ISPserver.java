@@ -3,11 +3,9 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ISPserver {
@@ -112,9 +110,6 @@ public class ISPserver {
         return records;
     }
 
-
-
-
     public static void main(String[] args) throws Exception {
         // Create a DatagramSocket
         int port = 1234;
@@ -127,7 +122,7 @@ public class ISPserver {
         
         byte[] request = packet.getData();
 
-        System.out.println("id = " + DNSresponse.id(request));
+        System.out.println("id = " + DNSresponse.parseIdOf(request));
         System.out.println("isRecursive = " + DNSresponse.isRecursive(request));
         System.out.println("domain = " + DNSresponse.domain(request));
         System.out.println("domainType = " + DNSresponse.domainType(request));
@@ -137,6 +132,7 @@ public class ISPserver {
         for(int i=0; i<answers.size(); i++){
             System.out.println(answers.get(i).toString());
         }
+
 
         System.out.println("authoritative: ");
         List<List<String>> authoritative = searchAuthoritative(DNSresponse.domain(request), DNSresponse.domainType(request));
@@ -150,10 +146,11 @@ public class ISPserver {
             System.out.println(additional.get(i).toString());
         }
 
+        DNSresponse dnsResponse = new DNSresponse(request, 0, answers, authoritative, additional);
+        byte[] response = dnsResponse.responseMessage();
+
         // Send a response to the client
-        String response = "Welcome to CSE 3111!";
-        buffer = response.getBytes();
-        packet = new DatagramPacket(buffer, buffer.length, packet.getAddress(), packet.getPort());
+        packet = new DatagramPacket(response, response.length, packet.getAddress(), packet.getPort());
         socket.send(packet);
 
         // Close the socket
